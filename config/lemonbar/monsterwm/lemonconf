@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+background="#586e75"
+
+Battery(){
+	battery_state=$(acpi --battery | cut -d, -f2)
+	echo "$battery_state"
+}
+
+AddUnderline() {
+	echo "%{+u}$1%{-u}"
+}
+
+AddAccent() {
+	echo "%{F#FFdc322f}$1%{F-}"
+}
+
+Workspaces() {
+	desktops=$(bspc query -D --names)
+    focused=$(bspc query -D --names -d focused)
+
+	for desktop in $desktops; do
+		desktop=$(echo "$desktop")
+		nodes=$(bspc query -N -d $desktop)
+
+		if [ ! -z "$nodes" ]; then
+			desktops=$(echo $desktops | sed "s/$desktop/$desktop/")
+    		fi
+
+  	done
+  desktops=$(echo $desktops | sed "s/$focused/%{+u}$focused%{-u}/")
+
+  echo $desktops | sed "s/_/ /g"
+}
+
+ActiveWindow(){
+	printf " $(xdotool getwindowfocus getwindowname)"
+}
+
+Sound(){
+	vol=$( pamixer --get-volume )
+	ismuted=$( pamixer --get-mute )
+	case "$ismuted" in
+		"false") ismuted=+ ;;
+		"true") ismuted=- ;;
+	esac
+	echo "vol:${vol}%${ismuted}"
+}
+
+Clock(){
+	DATE=$(date "+%d/%m/%y")
+	TIME=$(date "+%I:%M:%S")
+
+	echo "${DATE} ${TIME}"
+}
+
+Layout() {
+	layout=$( xkb-switch )
+	cutted=$( echo $layout | cut -c1-2 )
+	echo "$cutted"
+}
+
+Update() {
+	echo -e "%{l}%{r}$(Layout) $(Sound) $(Battery)\t $(Clock)  "
+}
+
+while true; do
+	Update
+done

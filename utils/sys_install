@@ -1,0 +1,107 @@
+#!/usr/bin/sh
+
+RED='\033[0;31m'
+NOC='\033[0m'
+cache_dir="$HOME/.cache/sskcvqikf_installation"
+
+mkdir -p $cache_dir
+cd $cache_dir
+
+echo -e ${RED}
+echo "               __                    _ __   ____"
+echo "    __________/ /________   ______ _(_) /__/ __/"
+echo "   / ___/ ___/ //_/ ___/ | / / __ '/ / //_/ /_"  
+echo "  (__  |__  ) ,< / /__ | |/ / /_/ / / ,< / __/"  
+echo " /____/____/_/|_|\___/ |___/\__, /_/_/|_/_/"     
+echo "                              /_/"
+echo -e ${NOC}
+
+function yes_or_no {
+	local what=$1
+	local success=$2
+	local fail=$3
+	echo -n $what
+	echo -n " [Y/n] "
+	read answ
+	if [[ $answ == y* ]]; then
+		$success
+	else
+		$fail
+	fi
+	
+}
+
+
+function install_essential_packages {
+	function inner_success {
+		sudo pacman -Syu qutebrowser emacs bspwm git xorg-xinit sxhkd \
+			dunst xdotool mpv mpd ncmpcpp neovim gimp youtube-dl \
+			gcc cmake zsh kitty zsh-syntax-highlighting feh \
+			xdg-user-dirs xdg-utils pcmanfm-gtk3 boost gtk3 gtk2 \
+			python pamixer alsa-plugins alsa-utils pulseaudio-alsa \
+			alsa-firmware alsa-card-profiles alsa-tools pulseaudio \
+			maim xclip pavucontrol translate-shell obs-studio texlive-most \
+			texlive-lang texlive-langextra ttf-caladea ttf-carlito \
+			ttf-dejavu ttf-liberation ttf-linux-libertine-g noto-fonts \
+			adobe-source-code-pro-fonts adobe-source-sans-pro-fonts \
+			adobe-source-serif-pro-fonts kbd tmux
+	}
+	function inner_fail {
+		echo "Skipping installation of the essential packages."
+	}
+	local what="Do you want to install essential packages?"
+	yes_or_no "$what" inner_success inner_fail
+}
+
+function do_aur_installation {
+	local repo=$1
+	local dir=$2
+	function inner_success {
+		echo "Installing $dir..."
+		sleep 2
+		git clone $repo
+		cd $dir
+		vim PKGBUILD
+		makepkg -sri
+		cd ..
+	}
+	function inner_fail {
+		echo "Skipping installation of $dir..."
+	}
+	what="Do you want to install $dir?"
+	yes_or_no "$what" inner_success inner_fail
+}
+
+install_essential_packages
+
+do_aur_installation "https://aur.archlinux.org/lemonbar-xft-git.git" "lemonbar-xft-git"
+
+do_aur_installation "https://aur.archlinux.org/xkb-switch-git.git" "xkb-switch-git"
+
+do_aur_installation "https://aur.archlinux.org/libtd-git.git" "libtd-git"
+
+do_aur_installation "https://aur.archlinux.org/gtk-theme-numix-solarized.git" "gtk-theme-numix-solarized"
+
+do_aur_installation "https://aur.archlinux.org/vimix-icon-theme.git" "vimix-icon-theme"
+
+do_aur_installation "https://aur.archlinux.org/urxvt-resize-font-git.git" "urxvt-resize-font-git"
+
+do_aur_installation "https://aur.archlinux.org/urxvt-clipboard.git" "urxvt-clipboard"
+
+function install_doom_emacs {
+	function inner_success {
+		rm -rf $HOME/.emacs.d
+		git clone --depth 1 https://github.com/hlissner/doom-emacs $HOME/.emacs.d
+		$HOME/.emacs.d/bin/doom install
+		echo "Doom Emacs installed successfully."
+	}
+	function inner_fail {
+		echo "Skipping Doom Emacs installation..."
+	}
+	what="Install Doom Emacs?"
+	yes_or_no "$what" inner_success inner_fail
+}
+
+install_doom_emacs
+
+rm -rf $cache_dir

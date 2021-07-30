@@ -1,0 +1,76 @@
+super + Return
+	urxvt
+
+alt + p
+	dmenu_run -fn "Source Code Pro"-10 -nb "#002b36" \
+	-nf "#647b83" -sb "#073642"
+
+super + t
+	/usr/bin/telegram-desktop
+
+super + f
+	/usr/bin/firefox
+
+super + d
+	/usr/bin/discord
+
+super + o
+	/usr/bin/code
+
+XF86AudioLowerVolume
+	/usr/bin/pamixer -d 5
+
+XF86AudioRaiseVolume
+	/usr/bin/pamixer -i 5
+
+XF86AudioMute
+	/usr/bin/pamixer -t
+
+ctrl + Print
+	maim -s | xclip -selection clipboard -t image/png
+
+Print
+	maim | xclip -selection clipboard -t image/png
+
+ctrl + shift + Print
+	maim -s ~/pics/maim/$(date +%s).png	
+
+alt + {1, 2, 3, 4, 5, 6, 7, 8} 
+	bspc desktop -f {1, 2, 3, 4, 5, 6, 7, 8}
+
+alt + shift + {1, 2, 3, 4, 5, 6, 7, 8}
+    id=$(bspc query -N -n); bspc node -d {1, 2, 3, 4, 5, 6, 7, 8}
+	# set id (bspc query -N -n); bspc node -d {1, 2, 3, 4, 5, 6, 7, 8}
+
+alt + {t, s, f, p}
+	bspc node -t \~{tiled,floating,fullscreen,pseudo_tiled}
+
+alt +{_, shift + } h
+	bspc node -z left {-50, +50} 0
+
+alt +{_, shift + } k
+	bspc node -z bottom 0 {+50, -50}
+
+alt +{_, shift + } j
+	bspc node -z top 0 {-50, +50}
+
+alt +{_, shift + } l
+	bspc node -z right {+50, -50} 0
+
+alt + Return
+	bspc node -s biggest.local
+
+alt + {_,shift + }{y, i, u, o}
+	bspc node -{f,s} {west, south, north, east}
+
+alt + {_, shift +} 0
+	bspc node {-c, -k}
+
+alt + n
+	dunstctl set-paused toggle
+
+alt + m
+	dunstctl close-all
+
+alt + r
+	bspc node @/ -R 90

@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+$HOME/.config/lemonbar/lemonconf | lemonbar -n "lemonbar_info" -d -p -g 960x15+320+0 -F "#FF839496" -B "#FF002b36" -U "#FF657b83" \
+-u 1 -f 'Source Code Pro'-9 -f 'Font Awesome 5 Free'-10 -f 'Font Awesome 5 Brands'-10 -f 'Font Awesome 5 Free Solid'-10

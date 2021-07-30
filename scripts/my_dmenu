@@ -1,0 +1,3 @@
+#!/bin/sh
+dmenu_run -fn "Source Code Pro"-9 -nb "#002b36" \
+-nf "#647b83" -sb "#073642"

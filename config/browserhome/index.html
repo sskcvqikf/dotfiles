@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <style>
+        :root{
+            --main-bg-color: #002b36;
+            --main-fg-color: #657b83;
+            --main-accent-color: #8e3330;
+        }
+
+        html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+            font-family: "Source Code Pro";
+            color: var(--main-fg-color);
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+            background: var(--main-bg-color);
+            background-size: cover;
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+        .pic{
+            margin: auto;
+            margin-top: 140px;
+            background-image: url("./doom.gif");
+            background-size: contain;
+            width: 100px;
+            height: 100px;
+        }
+        .greeting{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--main-accent-color);
+        }
+        .date-container{
+			text-align: center;
+		}
+
+		#time{
+			text-align: center;
+            display: inline-block;
+			font-size: 18px;
+			margin-right: 5px;
+
+		}
+
+		#date{
+            display: inline-block;
+			text-align: center;
+			font-family: 200;
+			font-size: 18px;
+		}
+
+        .pages{
+			margin-top: 70px;
+		}
+
+		.pages-flex{
+			display: flex;
+			justify-content: center;
+		}
+
+		.pages-flex>div{
+			margin-left: 35px;
+			margin-right: 35px;
+			padding: 15px;
+			width: 150px;
+            height: 100px;
+			display: flex;
+			flex-direction: column;
+		}
+        .pages-flex>div>p{
+            color: var(--main-accent-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+		.flex-item{
+			margin-bottom: 10px;
+			margin-left: 15px;
+		}
+
+		.flex-item:last-child{
+			margin-bottom: 0px;
+		}
+
+		.flex-item a {
+			color: #657b83;
+			text-decoration: none;
+			text-transform: lowercase;
+			font-family: Regular;
+			font-size: 15px;
+            font-family: "Source Code Pro";
+		}
+
+		.flex-item a:hover {
+			color: var(--main-accent-color);
+		}
+
+    </style>
+</head>
+<body>
+    <header>
+        <p class="pic"></p>
+        <p class="greeting">hello, sskcvqikf</p>
+		<div class="date-container">
+			<p id="time"></p>
+			<p id="date"></p>
+		</div>
+	</header>
+
+	<section class="pages">
+		<div class="pages-flex">
+			<div class="developing">
+                <p>~/main</p>
+                <div class="flex-item"><a href="https://en.cppreference.com/w/">/cppreference</a></div>
+				<div class="flex-item"><a href="https://github.com/sskcvqikf">/github</a></div>
+				<div class="flex-item"><a href="https://www.codewars.com/">/codewars</a></div>
+				<div class="flex-item"><a href="https://www.wikipedia.org/">/wikipedia</a></div>
+			</div>
+			<div class="graphic">
+                <p>~/chill</p>
+				<div class="flex-item"><a href="https://www.pinterest.com/">/pinterest</a></div>
+				<div class="flex-item"><a href="https://findanime.net/">/findanime</a></div>
+				<div class="flex-item"><a href="https://www.youtube.com/">/youtube</a></div>
+				<div class="flex-item"><a href="https://www.reddit.com/r/unixporn/">/r/unixporn</a></div>
+			</div>
+			<div class="rest">
+                <p>~/social</p>
+				<div class="flex-item"><a href="https://www.reddit.com/">/reddit</a></div>
+				<div class="flex-item"><a href="https://dl.nure.ua/">/dl nure ua</a></div>
+				<div class="flex-item"><a href="https://archlinux.org/">/arch linux</a></div>
+				<div class="flex-item"><a href="https://www.gentoo.org/">/gentoo linux</a></div>
+			</div>
+		</div>
+	</section>
+
+    <script>
+		function formatAMPM() {
+			var d = new Date(),
+    		minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+    		hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+    		months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    		days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    		document.getElementById("time").innerHTML = hours + ':' + minutes;
+    		document.getElementById("date").innerHTML = days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear();
+			return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes;
+		}
+
+		setInterval(formatAMPM);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# create a fifo to send output
+ff="/tmp/monsterwm.fifo"
+[[ -p $ff ]] || mkfifo -m 600 "$ff"
+
+while read -r; do
+    # filter output to only what we want to match and parse
+    [[ $REPLY =~ ^(([[:digit:]]+:)+[[:digit:]]+ ?)+$ ]] && read -ra desktops <<< "$REPLY" || continue
+    for desktop in "${desktops[@]}"; do
+        # set values for
+        # d - the desktop id
+        # w - number of windows in that desktop
+        # m - tiling layout/mode for that desktop
+        # c - whether that desktop is the current (1) or not (0)
+        # u - whether a window in that desktop has an urgent hint set (1) or not (0)
+        IFS=':' read -r d w m c u <<< "$desktop"
+        # name each desktop 
+        case $d in
+            0) d="1" s="" ;;
+            1) d="2" s="" ;;
+            2) d="3" s="" ;;
+            3) d="4" s="" ;;
+            4) d="5" s="" ;;
+            5) d="6" s="" ;;
+            6) d="7" s="" ;;
+            7) d="8" s="" ;;
+        esac
+        # the current desktop color should be #d11783
+        # we will also display the current desktop's tiling layout/mode
+	b=""
+	e=""
+        ((c)) && b="%{+u}" && e="%{-u}" && case $m in
+            # name each layout/mode with a symbol
+            0) i="[T]" ;;
+            1) i="[M]" ;;
+            2) i="[B]" ;;
+            3) i="[G]" ;;
+            4) i="[F]" ;;
+        esac
+
+        # if the desktop has windows print that number next to the desktop name
+        # else just print the desktop name
+	((w)) && r+="$s $b$d($w)$e" || r+="$s $b$d$e"
+    done
+
+    # read from fifo and output to dzen2
+    echo "$r $i" && unset r
+done < "$ff" | lemonbar -n "lemonbar_desktops" -d -p -g 320x15+0+0 -F "#FF839496" -B "#FF002b36" -U "#FF657b83" \
+-u 1 -f 'Source Code Pro'-9 -f 'Font Awesome 5 Free'-10 -f 'Font Awesome 5 Brands'-10 -f 'Font Awesome 5 Free Solid'-10 &
+
+# pass output to fifo
+monsterwm > "$ff"
