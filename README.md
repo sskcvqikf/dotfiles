@@ -1,7 +1,8 @@
-<div align="center">
+<p align="center">
 ## OWN LITTLE WORLD
 a collection of my dotfiles
-</div>
+<img width="800" src="./assets/main.png">
+</p>
 ![](./assets/main.png)
 #### Daily driver
 - **OS**: [Arch linux](https://archlinux.org)
