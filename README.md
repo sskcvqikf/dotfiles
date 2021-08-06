@@ -1,7 +1,9 @@
 <p align="center">
+  
 ## OWN LITTLE WORLD
 a collection of my dotfiles
 <img width="800" src="./assets/main.png">
+  
 </p>
 #### Daily driver
 - **OS**: [Arch linux](https://archlinux.org)
