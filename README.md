@@ -3,7 +3,7 @@
 ## OWN LITTLE WORLD
 a collection of my dotfiles
   
-<img width="800" src="./assets/main.png">
+<img width="400" src="./assets/main.png">
   
 </div>
 
