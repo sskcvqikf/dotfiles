@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div align="center">
 ## OWN LITTLE WORLD
 a collection of my dotfiles
 </div>
