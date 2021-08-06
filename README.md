@@ -1,10 +1,10 @@
-<p align="center">
+<div align="center">
   
 ## OWN LITTLE WORLD
 a collection of my dotfiles
 <img width="800" src="./assets/main.png">
   
-</p>
+</div>
 #### Daily driver
 - **OS**: [Arch linux](https://archlinux.org)
 - **WM**: [monsterwm](https://github.com/c00kiemon5ter/monsterwm)/[bspwm](https://github.com/baskerville/bspwm)
