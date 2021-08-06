@@ -1,3 +1,4 @@
+![./assets/main.png]
 ## OWN LITTLE WORLD
 a collection of my dotfiles
 #### Daily driver
