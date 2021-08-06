@@ -2,6 +2,7 @@
 ## OWN LITTLE WORLD
 a collection of my dotfiles
 <img width="800" src="./assets/main.png">
+</p>
 #### Daily driver
 - **OS**: [Arch linux](https://archlinux.org)
 - **WM**: [monsterwm](https://github.com/c00kiemon5ter/monsterwm)/[bspwm](https://github.com/baskerville/bspwm)
@@ -17,4 +18,3 @@ a collection of my dotfiles
 - `./wallpapers` - wallpapers i use
 - `./doom.d` - doom emacs setup
 - `./other` - other colorschemes
-</p>
