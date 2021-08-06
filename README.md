@@ -1,4 +1,3 @@
-![./assets/main.png]
 <div style="text-align:center">
 ## OWN LITTLE WORLD
 a collection of my dotfiles
