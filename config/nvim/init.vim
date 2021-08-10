@@ -1,19 +1,22 @@
 call plug#begin()
 
-Plug 'mg979/vim-visual-multi'
-Plug 'chrisbra/vim-commentary'
-Plug 'matze/vim-move'
-Plug 'lervag/vimtex'
-
 Plug 'neoclide/coc.nvim'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 
-" c++ syntax highlighting
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
+function! s:insert_gates()
+    let reponame = trim(system("basename $(git rev-parse --show-toplevel)"))
+    let filename = expand("%:t")
+    let gatename = substitute(toupper(reponame . "_" . filename . "_"), "\\.", "_", "g")
+    execute "normal! i#ifndef " . gatename
+    execute "normal! o#define " . gatename . " "
+    execute "normal! o#pragma once\n\n\n"
+    execute "normal! o#endif // " . gatename
+    normal! kk
+endfunction
+
+let mapleader = " "
+nnoremap <space> <Nop>
 
 set number
 set whichwrap+=<,>,[,]
@@ -22,9 +25,35 @@ set softtabstop=4   " number of spaces in tab when editing
 set shiftwidth=4    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set copyindent
-nmap <ESC>[1;5D <C-Left>
-nmap <ESC>[1;5C <C-Right>
-cmap <ESC>[1;5D <C-Left>
-cmap <ESC>[1;5C <C-Right>
-imap <ESC>[1;5D <C-o><C-Left>
-imap <ESC>[1;5C <C-o><C-Right>
+
+nnoremap <ESC>[1;5D <C-Left>
+nnoremap <ESC>[1;5C <C-Right>
+inoremap <ESC>[1;5D <C-o><C-Left>
+inoremap <ESC>[1;5C <C-o><C-Right>
+
+nnoremap <leader>v viw
+nnoremap L $
+nnoremap H ^
+nnoremap J 25j
+nnoremap K 25k
+nnoremap <leader>b gT
+nnoremap <leader>n gt
+
+noremap <leader>h <c-w>h
+noremap <leader>l <c-w>l
+noremap <leader>j <c-w>j
+noremap <leader>k <c-w>k
+
+inoremap <c-q> <esc>
+
+autocmd FileType c,cpp,cc,hh,h,hpp vnoremap <buffer> <c-c> <esc>`<i/*<esc>`>lla*/<esc>
+autocmd FileType c,cpp,cc,hh,h,hpp nnoremap <buffer> <c-c> I//<space><esc>
+autocmd FileType c,cpp,cc,hh,h,hpp inoremap <buffer> <c-c> //<space>
+
+hi CocFloating ctermbg=Black
+hi CocErrorFloat ctermbg=Black ctermfg=Red
+hi CocWarningFloat ctermbg=Black ctermfg=Red
+
+autocmd BufNewFile *.{h,hpp,hh} call <SID>insert_gates()
+
+set statusline=%f%m%r%y%=%c,[%l/%L]%p%%
