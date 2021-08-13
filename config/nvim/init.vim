@@ -31,11 +31,12 @@ nnoremap <ESC>[1;5C <C-Right>
 inoremap <ESC>[1;5D <C-o><C-Left>
 inoremap <ESC>[1;5C <C-o><C-Right>
 
+noremap L $
+noremap H ^
+noremap J 25j
+noremap K 25k
+
 nnoremap <leader>v viw
-nnoremap L $
-nnoremap H ^
-nnoremap J 25j
-nnoremap K 25k
 nnoremap <leader>b gT
 nnoremap <leader>n gt
 
