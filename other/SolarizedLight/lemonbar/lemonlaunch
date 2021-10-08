@@ -1,6 +1,0 @@
-#!/usr/bin/bash
-
-killall lemonbar
-killall lemonconf
-~/.config/lemonbar/lemonconf | lemonbar -p -g 1920x20+0+0 -F "#FF657b83" -B "#FFfdf6e3" -U "#FF657b83" \
--u 2 -o -1 -f 'Source Code Pro'-12 -f 'Font Awesome 5 Free'-10 -f 'Font Awesome 5 Brands'-10 -f 'Font Awesome 5 Free Solid'-10

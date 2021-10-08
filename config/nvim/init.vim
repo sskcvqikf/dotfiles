@@ -1,6 +1,7 @@
 call plug#begin()
 
 Plug 'neoclide/coc.nvim'
+Plug 'karimElghamry/vim-auto-comment'
 
 call plug#end()
 
@@ -20,9 +21,9 @@ nnoremap <space> <Nop>
 
 set number
 set whichwrap+=<,>,[,]
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set copyindent
 
@@ -44,12 +45,22 @@ noremap <leader>h <c-w>h
 noremap <leader>l <c-w>l
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
+noremap <leader>, :bp<cr>
+noremap <leader>. :bN<cr>
+noremap <leader>/ :bd<cr>
+
+nmap <silent> <leader>d <Plug>(coc-definition)
+nmap <silent> <leader>x <Plug>(coc-type-definition)
+nmap <silent> <leader>i <Plug>(coc-implementation)
+nmap <silent> <leader>r <Plug>(coc-references)
+
+nnoremap <c-c> :AutoInlineComment<cr>
+vnoremap <c-c> :AutoBlockComment<cr>
+
+noremap <c-y> "+y
+noremap <c-p> "+p
 
 inoremap <c-q> <esc>
-
-autocmd FileType c,cpp,cc,hh,h,hpp vnoremap <buffer> <c-c> <esc>`<i/*<esc>`>lla*/<esc>
-autocmd FileType c,cpp,cc,hh,h,hpp nnoremap <buffer> <c-c> I//<space><esc>
-autocmd FileType c,cpp,cc,hh,h,hpp inoremap <buffer> <c-c> //<space>
 
 hi CocFloating ctermbg=Black
 hi CocErrorFloat ctermbg=Black ctermfg=Red
@@ -58,3 +69,16 @@ hi CocWarningFloat ctermbg=Black ctermfg=Red
 autocmd BufNewFile *.{h,hpp,hh} call <SID>insert_gates()
 
 set statusline=%f%m%r%y%=%c,[%l/%L]%p%%
+
+let g:autocomment_map_keys = 0
+let g:inline_comment_dict = {
+		\'//': ['js', 'ts', 'cpp', 'cc', 'cxx', 'h', 'hh', 'hpp', 'hxx', 'dart'],
+		\'#': ['py', 'sh'],
+		\'"': ['vim'],
+		\}
+
+let g:block_comment_dict = {
+		\'/*': ['js', 'ts', 'cpp', 'cc', 'cxx', 'h', 'hh', 'hpp', 'hxx', 'dart'],
+		\'"""': ['py'],
+		\}
+
