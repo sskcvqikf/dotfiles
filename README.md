@@ -21,4 +21,3 @@ a collection of my dotfiles
 - `./utils` - also scripts but for easier setup
 - `./wallpapers` - wallpapers i use
 - `./doom.d` - doom emacs setup
-- `./other` - other colorschemes
