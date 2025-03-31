@@ -9,14 +9,13 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-vim.keymap.set({ "n", "v" }, "L", "$", { desc = "Move cursor to the end of the line" })
-vim.keymap.set({ "n", "v" }, "H", "^", { desc = "Move cursor to the start of the line" })
-vim.keymap.set({ "n", "v" }, "J", "25j", { desc = "Move cursor down 25 lines" })
-vim.keymap.set({ "n", "v" }, "K", "25k", { desc = "Move cursor up 25 lines" })
+vim.keymap.set("", "L", "$", { desc = "Move cursor to the end of the line" })
+vim.keymap.set("", "H", "^", { desc = "Move cursor to the start of the line" })
+vim.keymap.set("", "J", "25j", { desc = "Move cursor down 25 lines" })
+vim.keymap.set("", "K", "25k", { desc = "Move cursor up 25 lines" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function() end,
 })
-

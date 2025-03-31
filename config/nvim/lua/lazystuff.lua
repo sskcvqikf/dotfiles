@@ -156,13 +156,13 @@ require("lazy").setup({
 						mode = mode or "n"
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+					map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+					map("<leader>gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+					map("<leader>dd", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
 					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 
@@ -270,6 +270,7 @@ require("lazy").setup({
 						},
 					},
 				},
+				pyright = {},
 			}
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
@@ -450,9 +451,6 @@ require("lazy").setup({
 		},
 	},
 	{
-		"ldelossa/nvim-ide",
-	},
-	{
 		"stevearc/oil.nvim",
 		opts = {},
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
@@ -460,6 +458,12 @@ require("lazy").setup({
 		config = function(_, _)
 			require("oil").setup()
 			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		end,
+	},
+	{
+		"numToStr/FTerm.nvim",
+		config = function(_, _)
+			vim.keymap.set("n", "<leader>T", require("FTerm").toggle, { desc = "Toggle terminal" })
 		end,
 	},
 })
