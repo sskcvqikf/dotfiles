@@ -90,9 +90,25 @@ require("lazy").setup({
 
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
+
 		config = function()
+			local actions = require("telescope.actions")
 			local telescope = require("telescope")
-			telescope.setup({})
+			telescope.setup({
+				pickers = {
+					buffers = {
+						initial_mode = "normal",
+						mappings = {
+							n = {
+								["dd"] = actions.delete_buffer,
+							},
+						},
+					},
+					find_files = {
+						initial_mode = "normal",
+					},
+				},
+			})
 
 			pcall(require("telescope").load_extension, "fzf")
 
